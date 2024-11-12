@@ -21,7 +21,7 @@ export const SingleBlogCard = ({blog} : {blog:Blogs}) => {
                 </div>
                 <div className="flex items-center space-x-4 pt-3">
                     <div>
-                        <Avatar name={blog.author.name || "Anonymous"} size="big"  />
+                        <Avatar name={blog.author.name.toUpperCase() || "Anonymous"} size="big"  />
                     </div>
                     <div  >
                         <div className=" text-2xl font-bold">
