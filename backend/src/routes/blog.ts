@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { verify } from 'hono/jwt'
-import { createBlogInputs, updateBlogInputs } from "@singhkiranjot/medium-blog-common";
+import { createBlogInputs, updateBlogInputs } from "@singhkiranjot/medium-common-package";
 
 export const blogRouter = new Hono<{
     Bindings:{
@@ -96,7 +96,18 @@ blogRouter.get('/bulk',async (c) => {
         datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
 
-    const posts = await prisma.post.findMany();
+    const posts = await prisma.post.findMany({
+      select :{
+        content : true ,
+        title : true ,
+        id : true,
+        author: {
+          select:{
+            name : true
+          }
+        }
+      }
+    });
     return c.json({
         posts
     });
@@ -112,6 +123,17 @@ blogRouter.get('/:id',async (c) => {
     const post = await prisma.post.findFirst({
 		where: {
             id : id
+        },
+
+        select:{
+          id: true,
+          title:true,
+          content:true,
+          author:{
+            select:{
+              name:true
+            }
+          }
         }
 	});
 	return c.json({

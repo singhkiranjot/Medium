@@ -1,5 +1,5 @@
 {
-  "name": "@singhkiranjot/medium-blog-common",
+  "name": "@singhkiranjot/medium-common-package",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",

@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { Hono } from 'hono'
 import { sign } from 'hono/jwt'
-import { signupInputs , signinInputs } from "@singhkiranjot/medium-blog-common"
+import { signupInputs , signinInputs } from "@singhkiranjot/medium-common-package"
 
 
 
@@ -33,6 +33,7 @@ userRouter.post('/signup', async (c) => {
       data:{
         email : body.email,
         password : body.password,
+        name : body.name
       },
     })
   
@@ -40,7 +41,8 @@ userRouter.post('/signup', async (c) => {
   
   
     return c.json({
-      jwt : token
+      jwt : token,
+      name : user.name
     })
 })
   
@@ -62,7 +64,8 @@ userRouter.post('/signin',async  (c) => {
       where:{
         email:body.email,
         password:body.password
-      }
+      },
+      
     })
   
     if(!user){
@@ -74,6 +77,7 @@ userRouter.post('/signin',async  (c) => {
     const token =  await sign({id:user.id} , c.env.JWT_SECRET)
   
     return c.json({
-      jwt : token
+      jwt : token,
+      name:user.name
     })
 })
