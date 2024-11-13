@@ -18,6 +18,6 @@ export const Blog = () => {
     }
     return <div>
         <Appbar/>
-        <SingleBlogCard blog={blog} />
+        <SingleBlogCard blog={blog || {content : "", title : "", author : {name : ""}, id : ""}} />
     </div>
 }
