@@ -10,9 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@singhkiranjot/medium-blog-common": "^1.0.0",
-    "@singhkiranjot/medium-blog-common-package": "^1.0.0",
-    "@singhkiranjot/medium-blog-common-updated": "^1.0.0",
     "@singhkiranjot/medium-common-package": "^1.0.0",
     "axios": "^1.7.7",
     "react": "^18.3.1",
